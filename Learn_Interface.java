@@ -1,25 +1,24 @@
 /*
-    -> An interface in Java is a blueprint of a class. 
-    -> It has static constants and abstract methods.
-    -> Is a mechanism to achieve abstraction.
-    -> Is a mechanism to achieve multiple inheritance in Java.
+    -> An interface in Java is a blueprint of a class, containing static constants and abstract methods.
+    -> Interfaces are used to achieve abstraction and provide support for multiple inheritance.
+    -> They are also used to achieve loose coupling between classes by defining expected behavior without specifying the implementation.
 
-
-    ** In other words, you can say that interfaces can have abstract methods and variables. **
-    ** It cannot have a method body. **
- */
-
-/*
-   Why use Java interface?
-
-   1) It is used to achieve abstraction.
-   2) By interface, we can support the functionality of multiple inheritance.
-   3) It can be used to achieve loose coupling.
-
+    Key Characteristics:
+    - An interface can only have abstract methods (Java 8+ also allows default and static methods).
+    - All variables declared in an interface are implicitly `public`, `static`, and `final`.
+    - Interfaces cannot contain concrete (non-abstract) method implementations (except for `default` and `static` methods in Java 8+).
 */
 
 /*
-    The relationship between classes and interfaces
+    Why use Java interfaces?
+
+    1) Achieve abstraction by defining a contract of methods that implementing classes must fulfill.
+    2) Enable multiple inheritance by allowing a class to implement multiple interfaces.
+    3) Promote loose coupling, where the implementation details of a class are hidden behind an interface.
+*/
+
+/*
+    Relationship between classes and interfaces:
 
             extends
     class ------------> class
@@ -29,96 +28,86 @@
 
                 extends
     interface ------------> interface
-
-
 */
 
 /*
-interface printable{
+interface printable {
     void print();
 }
 
-
-class Learn_Interface implements printable{
-    public void print(){
-            System.out.println("Hello printable");
-        }
-    public static void main(String[] args) {
-        
-        Learn_Interface obj = new Learn_Interface();
-        obj.print();
+class Learn_Interface implements printable {
+    public void print() {
+        System.out.println("Hello from printable interface");
     }
 
+    public static void main(String[] args) {
+        Learn_Interface obj = new Learn_Interface();
+        obj.print(); // Demonstrates implementation of the interface method
+    }
 }
-
 */
 
 /*
- -> In a real scenario, an interface is defined by someone else, 
- -> but its implementation is provided by different implementation providers. -> Moreover, it is used by someone else. 
- ->The implementation part is hidden by the user who uses the interface.
-
+ -> In real-world scenarios, interfaces are often defined by someone else, 
+ -> with different classes providing their own implementations of the interface.
+ -> This way, the implementation details are hidden from users of the interface, promoting loose coupling.
 */
 
-/* 
-
-// Interface declartion : by 1st user
+// Interface declaration by a "first" user
 interface Drawable {
     void draw();
 }
 
-// Implementation : by second user
+// Implementation of Drawable interface by a "second" user
 
 class Rectangle implements Drawable {
     public void draw() {
-        System.out.println("Drawing reactangle ");
+        System.out.println("Drawing rectangle...");
     }
 }
 
 class Circle implements Drawable {
     public void draw() {
-        System.out.println("Drawing circle..");
+        System.out.println("Drawing circle...");
     }
 }
 
-// Using interface : by 3rd user
-
-public class Learn_Interface {
-    public static void main(String[] args) {
-        Drawable d = new Circle();
-        d.draw();
-    }
-}
-
-*/
-
-// Multiple inheritance in Java by interface
-// If a class implements multiple interfaces, or an interface extends multiple interfaces, it is known as multiple inheritance.
-
-// Q) Multiple inheritance is not supported through class in java, but it is possible by an interface, why?
-// Ans :- because of ambiguity . However, it is supported in case of an interface because there is no ambiguity. It is because its implementation is provided by the implementation class.
-
-// Example
-
-interface printable {
-    void print();
-}
-
-interface showable {
-    void show();
-}
+// Using interface by a "third" user
 
 public class Learn_Interface implements printable, showable {
+    // Multiple inheritance through interfaces
+
     public void print() {
-        System.out.println("Hello");
+        System.out.println("Hello from printable interface");
     }
 
     public void show() {
-        System.out.println("Welcome");
+        System.out.println("Welcome from showable interface");
     }
 
     public static void main(String[] args) {
         Learn_Interface obj = new Learn_Interface();
-        obj.show();
+
+        // Demonstrating multiple inheritance through interfaces
+        obj.print(); // Calls print() method from printable interface
+        obj.show(); // Calls show() method from showable interface
+
+        // Using the Drawable interface
+        Drawable drawable1 = new Circle(); // Polymorphic reference to Circle instance
+        drawable1.draw();
+
+        Drawable drawable2 = new Rectangle(); // Polymorphic reference to Rectangle instance
+        drawable2.draw();
     }
 }
+
+/*
+ * Explanation of Multiple Inheritance via Interfaces:
+ * 
+ * - Java does not support multiple inheritance with classes due to ambiguity
+ * issues (e.g., if two superclasses have methods with the same name).
+ * - However, it does allow multiple inheritance via interfaces, as there’s no
+ * ambiguity in implementation.
+ * - Each class implementing the interface provides its own method definitions,
+ * so no conflicting implementation occurs.
+ */

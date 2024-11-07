@@ -1,85 +1,104 @@
 /*
+-> The super keyword in Java is a reference variable used to refer to the immediate parent class object.
 
--> The super keyword in Java is a reference variable which is used to refer immediate parent class object.
+-> When you create an instance of a subclass, an instance of the parent class is implicitly created.
+   This instance of the parent class is referred to by the super reference variable.
 
--> Whenever you create the instance of subclass, an instance of parent class is created implicitly which is referred by super reference variable.
+** Usage of the Java super Keyword: **
 
-** Usage of Java super Keyword **
+-> Refer to the immediate parent class instance variable.
+-> Invoke the immediate parent class method.
+-> Use super() to invoke the immediate parent class constructor.
 
--> refer immediate parent class instance variable
--> invoke immediate parent class method
--> super() can be used to invoke immediate parent class constructor.
-
-
-Note: super() is added in each class constructor automatically by compiler if there is no super() or this().
-
- */
-
+Note: 
+- If no constructor is explicitly called in the subclass constructor, the compiler automatically adds a call to the parent class's default constructor using `super()`.
+*/
 
 class Animal {
-    String color = "White";
+    String color = "White"; // Parent class instance variable
 
-    void eat(){
+    // Parent class method
+    void eat() {
         System.out.println("Animal class is eating...");
     }
-    Animal(){
-        System.out.println("Animal is crated..");
+
+    // Parent class constructor
+    Animal() {
+        System.out.println("Animal is created...");
     }
 }
 
 class Dog extends Animal {
-    String color = "Black";
-    void eat(){
+    String color = "Black"; // Subclass instance variable
+
+    // Subclass method overriding the parent method
+    void eat() {
         System.out.println("Dog class is eating...");
     }
-    void bark(){
+
+    // New method specific to Dog class
+    void bark() {
         System.out.println("Dog is barking...");
     }
-    void work(){
-        super.eat();
-        bark();
+
+    // Subclass method calling the parent class method
+    void work() {
+        super.eat(); // Calls the parent class's eat method
+        bark(); // Calls the current class's bark method
     }
+
+    // Method demonstrating the use of super to refer to the parent class's variable
     void printColor() {
-        System.out.println(color);// prints color of Dog class
-        System.out.println(super.color);// prints color of Animal class
+        System.out.println(color); // Prints the color of the Dog class
+        System.out.println(super.color); // Prints the color of the Animal class
     }
-    Dog(){
-        super(); // If we comment this things and still is work beacuse compiler is doing by default.
-        System.out.println("Dog is created..");
+
+    // Subclass constructor calling the parent class constructor using super()
+    Dog() {
+        super(); // Calls the parent class constructor (implicitly added by compiler if not
+                 // present)
+        System.out.println("Dog is created...");
     }
 }
 
-// Real Life Example
-
-class Person{
+// Real-Life Example: Employee class extending Person class
+class Person {
     int id;
     String name;
-    Person(int id,String name){
+
+    // Constructor of Person class
+    Person(int id, String name) {
         this.id = id;
         this.name = name;
     }
 }
 
-class Emp extends Person{
+class Emp extends Person {
     float salary;
-    Emp(int id,String name,float salary){
-        super(id, name); // reusing parent constructor
+
+    // Constructor of Emp class calling the parent class constructor using super()
+    Emp(int id, String name, float salary) {
+        super(id, name); // Reusing the constructor of the Person class
         this.salary = salary;
     }
 
-    void printDetails(){
+    // Method to print employee details
+    void printDetails() {
         System.out.println("ID :- " + id);
         System.out.println("Name :- " + name);
         System.out.println("Salary :- " + salary);
     }
 }
+
 public class Super {
     public static void main(String[] args) {
-        // Dog d = new Dog();
-        // d.printColor();
-        // d.work();
+        // Dog class example
+        Dog d = new Dog(); // Calls the Dog constructor which in turn calls the Animal constructor
+        d.printColor(); // Demonstrates super to access the parent class variable
+        d.work(); // Calls the work method which invokes the super class's eat method
 
-        Emp e1 = new Emp(1, "Vinay", 55000f);
-        e1.printDetails();
+        // Emp class example
+        Emp e1 = new Emp(1, "Vinay", 55000f); // Calls the Emp constructor, which calls Person's constructor
+        e1.printDetails(); // Prints employee details
     }
 }

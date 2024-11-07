@@ -1,66 +1,83 @@
-// Both are used to achieve abstraction
-/*
+/* 
+    This code demonstrates the differences between abstract classes and interfaces in Java.
 
-Feature                                     | Abstract Class                               | Interface
---------------------------------------------------------------------------------------------------------------
-1. Method Types                            | Can have abstract and non-abstract methods   | Can have only abstract methods. Since Java 8, it can have default and static methods also.
---------------------------------------------------------------------------------------------------------------
-2. Multiple Inheritance                    | Doesn't support multiple inheritance         | Supports multiple inheritance.
---------------------------------------------------------------------------------------------------------------
-3. Variable Types                          | Can have final, non-final, static, and non-static variables | Has only static and final variables.
---------------------------------------------------------------------------------------------------------------
-4. Implementation of Interfaces           | Can provide the implementation of an interface | Can't provide the implementation of an abstract class.
---------------------------------------------------------------------------------------------------------------
-5. Keyword Usage                           | Uses the "abstract" keyword to declare       | Uses the "interface" keyword to declare
---------------------------------------------------------------------------------------------------------------
-6. Inheritance and Extension              | Can extend another Java class and implement multiple Java interfaces | Can extend another Java interface only.
---------------------------------------------------------------------------------------------------------------
-7. Syntax for Extension/Implementation     | Extended using the "extends" keyword        | Implemented using the "implements" keyword.
---------------------------------------------------------------------------------------------------------------
-8. Access Modifiers                        | Can have class members with various access modifiers (private, protected, etc.) | Members of a Java interface are public by default.
---------------------------------------------------------------------------------------------------------------
-9. Example                                 | Example of an abstract class:                | Example of an interface:
-                                           | public abstract class Shape{                | public interface Drawable{
-                                           |    public abstract void draw();             |    void draw();
-                                           | }                                         | }
---------------------------------------------------------------------------------------------------------------
+    Feature Comparison:
+    
+    1. Method Types:
+       - Abstract classes can have both abstract and non-abstract methods.
+       - Interfaces can only have abstract methods by default but, since Java 8, they can have default and static methods.
+
+    2. Multiple Inheritance:
+       - Abstract classes don't support multiple inheritance.
+       - Interfaces do support multiple inheritance.
+
+    3. Variable Types:
+       - Abstract classes can have final, non-final, static, and non-static variables.
+       - Interfaces only allow static and final variables.
+
+    4. Implementation:
+       - Abstract classes can implement interfaces.
+       - Interfaces cannot provide the implementation of an abstract class.
+
+    5. Keyword Usage:
+       - Abstract classes use the "abstract" keyword.
+       - Interfaces use the "interface" keyword.
+
+    6. Access Modifiers:
+       - Abstract class members can have various access modifiers.
+       - Interface members are `public` by default.
 
 */
 
-// Example of abstract class and interface in Java
+// Interface example: Defines four abstract methods (implicitly public and abstract)
+interface Action {
+    void actionA();
 
+    void actionB();
 
-interface A{
-    void a(); // bydefault,public and abstract
-    void b();
-    void c();
-    void d();
+    void actionC();
+
+    void actionD();
 }
 
-abstract class B implements A{
-    public void c(){
-        System.out.println("I am C in abstract class");
+// Abstract class example: provides partial implementation of the Action
+// interface
+abstract class PartialAction implements Action {
+    // Implementing one of the methods
+    public void actionC() {
+        System.out.println("I am actionC in the abstract class PartialAction");
+    }
+    // Other methods remain abstract and must be implemented by any concrete
+    // subclass
+}
+
+// Concrete class implementing all remaining methods of the Action interface
+class ConcreteAction extends PartialAction {
+    // Providing implementation for the remaining abstract methods
+    public void actionA() {
+        System.out.println("I am actionA");
+    }
+
+    public void actionB() {
+        System.out.println("I am actionB");
+    }
+
+    public void actionD() {
+        System.out.println("I am actionD");
     }
 }
 
-class M extends B{
-    public void a(){
-        System.out.println("I am A");
-    }
-    public void b(){
-        System.out.println("I am b");
-    }  
-    public void d(){
-        System.out.println("I am d");
-    }  
-}
+// Main class to test the interface and abstract class
 public class Abstract_Vs_Interface {
     public static void main(String[] args) {
-        A obj = new M();
-        obj.a();
-        obj.b();
-        obj.c();
-        obj.d();
-    }
+        // Using polymorphism to refer to the ConcreteAction object with an Action
+        // interface reference
+        Action action = new ConcreteAction();
 
+        // Calling the methods to show interface and abstract class functionality
+        action.actionA();
+        action.actionB();
+        action.actionC();
+        action.actionD();
+    }
 }
