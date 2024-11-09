@@ -14,7 +14,7 @@ Note:
 - If no constructor is explicitly called in the subclass constructor, the compiler automatically adds a call to the parent class's default constructor using `super()`.
 */
 
-class Animal {
+class AnimalOld {
     String color = "White"; // Parent class instance variable
 
     // Parent class method
@@ -23,12 +23,12 @@ class Animal {
     }
 
     // Parent class constructor
-    Animal() {
+    AnimalOld() {
         System.out.println("Animal is created...");
     }
 }
 
-class Dog extends Animal {
+class DogOld extends AnimalOld {
     String color = "Black"; // Subclass instance variable
 
     // Subclass method overriding the parent method
@@ -54,7 +54,7 @@ class Dog extends Animal {
     }
 
     // Subclass constructor calling the parent class constructor using super()
-    Dog() {
+    DogOld() {
         super(); // Calls the parent class constructor (implicitly added by compiler if not
                  // present)
         System.out.println("Dog is created...");
@@ -93,7 +93,7 @@ class Emp extends Person {
 public class Super {
     public static void main(String[] args) {
         // Dog class example
-        Dog d = new Dog(); // Calls the Dog constructor which in turn calls the Animal constructor
+        DogOld d = new DogOld(); // Calls the Dog constructor which in turn calls the Animal constructor
         d.printColor(); // Demonstrates super to access the parent class variable
         d.work(); // Calls the work method which invokes the super class's eat method
 

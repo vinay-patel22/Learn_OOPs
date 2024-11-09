@@ -38,7 +38,7 @@
  */
 
 //  class definition
-class Student {
+class StudentUrban {
     String studentName;
 }
 
@@ -47,11 +47,11 @@ public class Best_OOPs_Interview_Questions {
     public static void main(String[] args) {
 
         // creating an object
-        Student student1 = new Student();
+        StudentUrban student1 = new StudentUrban();
 
         // assigning member some value
         student1.studentName = "Vinay Patel";
 
-        System.out.println("Student1.studentName " + student1.studentName);
+        System.out.println("Student1.studentName = " + student1.studentName);
     }
 }

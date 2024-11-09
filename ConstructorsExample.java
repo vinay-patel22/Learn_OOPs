@@ -29,12 +29,12 @@ class Bike1 {
     }
 }
 
-class Student {
+class StudentDetails {
     String name;
     int id;
 
     // Parameterized constructor: Initializes the object with the provided values.
-    Student(String name, int id) {
+    StudentDetails(String name, int id) {
         this.name = name;
         this.id = id;
     }
@@ -75,9 +75,9 @@ public class ConstructorsExample {
         // Uncomment to see the default constructor in action.
         // Bike1 b1 = new Bike1(); // Output: Bike is created
 
-        // Creating objects using the parameterized constructor (Student).
-        Student s1 = new Student("Vinay", 42);
-        Student s2 = new Student("Patel", 41);
+        // Creating objects using the parameterized constructor (StudentDetails).
+        StudentDetails s1 = new StudentDetails("Vinay", 42);
+        StudentDetails s2 = new StudentDetails("Patel", 41);
         s1.displayData();
         s2.displayData();
 
