@@ -47,7 +47,24 @@
     - showing only the necessary information and hiding the other irrelevant information from the user
     - Abstraction is implemented using classes and interfaces.
 
+8. What is Polymorphism?
+    
+    -The word “Polymorphism” means having many forms. 
 
+    - Polymorphism can be classified into two types based on the time when the call to the object or function is resolved. They are as follows:
+
+        - Compile Time Polymorphism
+        - Runtime Polymorphism
+        
+        A) Compile-Time Polymorphism (static polymorphism or early binding)
+
+            - Method overloading or operator overloading are examples of compile-time polymorphism.
+
+        B) Runtime Polymorphism (dynamic polymorphism or late binding)
+
+            - where the actual implementation of the function is determined during the runtime or execution. 
+            
+            -Method overriding is an example of this method.
 
 
  */
@@ -234,6 +251,82 @@ public class Best_OOPs_Interview_Questions {
         savings.deposit(200.0); // Deposit amount
         savings.withdraw(150.0); // Withdraw amount
         savings.applyInterest(); // Apply interest
+
+    }
+}
+
+
+
+// Code explain point 8.
+
+// A) Compile-Time Polymorphism (Method Overloading)
+
+class Calculator {
+    // Method to add two integers
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    // Overloaded method to add three integers
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // Overloaded method to add two double values
+    public double add(double a, double b) {
+        return a + b;
+    }
+}
+
+public class InnerBest_OOPs_Interview_Questions {
+
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+
+        // Calling different overloaded methods based on arguments
+        System.out.println("Sum of two integers: " + calculator.add(5, 10)); // Calls add(int, int)
+        System.out.println("Sum of three integers: " + calculator.add(5, 10, 15)); // Calls add(int, int, int)
+        System.out.println("Sum of two doubles: " + calculator.add(5.5, 3.2)); // Calls add(double, double)
+
+    }
+}
+
+// B) Runtime Polymorphism (Method Overriding)
+
+// Base class
+class Animal {
+    // Method that can be overridden
+    public void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+// Derived class Dog that overrides the sound() method
+class Dog extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+// Derived class Cat that overrides the sound() method
+class Cat extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class InnerInnerBest_OOPs_Interview_Questions {
+
+    public static void main(String[] args) {
+        // Create Animal reference but Dog object
+        Animal animal1 = new Dog();
+        Animal animal2 = new Cat();
+
+        // Calls the overridden methods at runtime
+        animal1.sound(); // Outputs: Dog barks
+        animal2.sound(); // Outputs: Cat meows
 
     }
 }
